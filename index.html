@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Song App</title>
+    <link rel="stylesheet" type="text/css" href="font-awesome.css">
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
@@ -13,24 +14,47 @@
             <h1> Welcome to Songify </h1>
             <h3> Enter name to access your account </h3>
             <div class="input-wrapper">
-                <input type="text" placeholder="Name" value="rajat" id="name-input">
+                <input type="text" placeholder="Name" id="name-input">
                 <button> Go </button>
+                <h4 style="color: red"></h4>
             </div>
         </section>
         <div class="main hidden">
+        <header> <div class="right floated user-name"> </div> <i class="fa fa-arrow-left" aria-hidden="true"></i><p id="date"></p></header>
+        <section class="content">
+            <audio src="song.mp3" controls></audio>
+        </section>
+        <footer> 
+        <div class="controls" style="text-align: center">
+        <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+        </div>
+        </footer>
         </div>
     </div>
-<script>
-    /*var name;
-    name=document.querySelector('#name-input').value;
-    console.log(name);*/
-    var button = document.querySelector('.welcome-screen button');
-    button.addEventListener('click',function () {
-        alert('click!!');
-        var name;
-        name=document.querySelector('#name-input').value;
-        console.log(name);
+    <script src="jquery.js">
+    </script>
+    <script>
+$('.welcome-screen button').on('click', function() {
+    var name = $('#name-input').val();
+    var d= new Date();
+    document.getElementById('date').innerHTML = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
+    if(name.length>2){
+    var message = "Welcome, " + name;
+    $('.main .user-name').text(message);
+    $('.welcome-screen').addClass('hidden');
+    $('.main').removeClass('hidden');
+    $('.main i').on('click',function () {
+      $('.main').addClass('hidden');
+      $('.welcome-screen').removeClass('hidden');
     });
+    }
+    else{
+        $('#name-input').addClass('error');
+        $('.welcome-screen h4').text('Invalid Name');
+        alert('Wrong Input');
+    }
+});
 </script>
 </body>
+
 </html>

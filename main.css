@@ -39,7 +39,6 @@ h1 {
     display: flex;
     flex-direction: column;
     color: white;
-    background-color: #1f1f1f;
 }
 
 .main header {
@@ -47,15 +46,6 @@ h1 {
     background-color: #282828;
     padding: 1rem;
     color: #FFF;
-}
-
-
-#logout {
-    font-size: 1.5rem;
-}
-
-.play-all {
-    font-size: 1.3rem;
 }
 
 .main .content {
@@ -69,11 +59,11 @@ h1 {
     padding-top: 1rem;
 }
 
-.player-buttons {
+.controls {
     display:flex;
-    font-size: 1.5rem;
     justify-content: center;
     align-items: center;
+    font-size: 2rem;
 }
 
 .hidden {
@@ -92,135 +82,6 @@ h1 {
     border: 2px solid red;
 }
 
-.total-songs {
-    margin-top: 2%;
-}
-.progress-wrapper {
-    margin-top: 0.3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.progress-wrapper span {
-    color: #959595;
-}
-
-.player-progress {
-    height: 8px;
-    width: 700px;
-    background-color: #3d3d3d;
-    border-radius: 4px;
-    margin-right: 6px;
-    margin-left: 6px;
-}
-
-.progress-filled {
-    background-color: #959595;
-    height: 8px;
-    border-radius: 4px;
-    width: 0;
-
-}
-
-.time-left {
-    text-align: center;
-    color: #959595;
-}
-
-.main .content {
-    width: 90%;
-    margin: 2rem auto;
-}
-
-.list-headers {
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.5);
-}
-
-.list-headers > div {
-    width: 15%;
-    display: inline-block;
-}
-
-.list-headers > div:first-child {
-    width: 20%;
-}
-
-.song-list {
-  width: 75%;
-  margin: 0 auto;
-}
-
-.song-list .song {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.5);
-    min-height: 30px;
-    cursor: pointer;
-}
-
-a {
-    color: white;
-    display: none;
-}
-
-.song:hover a {
-    display: inline;
-}
-
-.song > span {
-    display: inline-block;
-    width: 15%;
-    overflow: hidden;
-    height: 1rem;
-}
-.song > span:first-child {
-    width: 20%;
-}
-
-.song-list .song:hover {
-    background-color: #282828;
-}
-
-.content {
-    position: relative;
-}
-.current-song-wrapper {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-}
-
-.current-song-image {
-    height: 100px;
-    width: 100px;
-    margin-right: 1rem;
-}
-
-#submit-song {
-  border: 1px solid white;
-  padding: 20px;
-  width: 300px;
-}
-#submit-song > span {
-  margin: 0 auto;
-}
-
-.input-container {
-  width: 150px;
-  margin: 10px 0 10px 40px ;
-}
-
-.input-container > input {
-  height: 20px;
-  width: 200px;
-}
-
-.lyrics-container {
-  width: 20%;
-  height: 200px;
-  overflow:scroll;
-  border: 1px solid white ;
-  display:inline-block;
+.play-icon {
+    // color: teal;
 }
