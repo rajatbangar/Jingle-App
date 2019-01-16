@@ -43,10 +43,38 @@ $('.welcome-screen button').on('click', function() {
     $('.main .user-name').text(message);
     $('.welcome-screen').addClass('hidden');
     $('.main').removeClass('hidden');
-    $('.main i').on('click',function () {
+    $('.main .fa-arrow-left').on('click',function () {
       $('.main').addClass('hidden');
       $('.welcome-screen').removeClass('hidden');
     });
+        $('body').on('keypress',function (event) {
+            var song = document.querySelector('audio');
+            if(event.keyCode==32){
+                if(song.paused==true){
+                    console.log('playing');
+                    $('.play-icon').addClass('fa-pause').removeClass('fa-play');
+                    song.play();
+                }
+                else {
+                    console.log('pausing');
+                    $('.play-icon').addClass('fa-play').removeClass('fa-pause');
+                    song.pause();
+                }
+            }
+        });
+        $('.play-icon').on('click',function() {
+            var song = document.querySelector('audio');
+            if(song.paused==true){
+                console.log('playing');
+                $('.play-icon').addClass('fa-pause').removeClass('fa-play');
+                song.play();
+            }
+            else {
+                console.log('pausing');
+                $('.play-icon').addClass('fa-play').removeClass('fa-pause');
+                song.pause();
+            }
+        });
     }
     else{
         $('#name-input').addClass('error');
