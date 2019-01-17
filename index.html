@@ -10,79 +10,127 @@
 
 <body>
     <div class="wrapper">
-        <section class="welcome-screen">
+        <section class="welcome-screen hidden">
             <h1> Welcome to Songify </h1>
             <h3> Enter name to access your account </h3>
             <div class="input-wrapper">
                 <input type="text" placeholder="Name" id="name-input">
                 <button> Go </button>
-                <h4 style="color: red"></h4>
             </div>
         </section>
-        <div class="main hidden">
-        <header> <div class="right floated user-name"> </div> <i class="fa fa-arrow-left" aria-hidden="true"></i><p id="date"></p></header>
-        <section class="content">
-            <audio src="song.mp3" controls></audio>
-        </section>
-        <footer> 
-        <div class="controls" style="text-align: center">
-        <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+        <div class="main">
+            <header>
+                <div class="right floated user-name"> </div>
+            </header>
+            <section class="content">
+                <audio src="song.mp3"></audio>
+                <div class="list-headers">
+        <div> Title </div> 
+        <div> Artist </div>
+        <div> Album </div>
+        <div> Duration </div>
         </div>
-        </footer>
+        <div class="song-list">
+        <div class="song">
+        <span class="song-name"></span>
+        <span class="song-artist"></span>
+        <span class="song-album"></span>
+        <span class="song-length"></span>
+        </div>
+        </div>
+            </section>
+            <footer>
+                <div class="controls">
+                    <div class="player-buttons">
+                        <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+                    </div>
+                    <div class="progress-wrapper">
+                        <span class="time-elapsed"> </span>
+                        <div class="player-progress">
+                            <div class="progress-filled"> </div>
+                        </div>
+                        <span class="song-duration"></span>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
     <script src="jquery.js">
     </script>
     <script>
-$('.welcome-screen button').on('click', function() {
-    var name = $('#name-input').val();
-    var d= new Date();
-    document.getElementById('date').innerHTML = d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDate();
-    if(name.length>2){
-    var message = "Welcome, " + name;
-    $('.main .user-name').text(message);
-    $('.welcome-screen').addClass('hidden');
-    $('.main').removeClass('hidden');
-    $('.main .fa-arrow-left').on('click',function () {
-      $('.main').addClass('hidden');
-      $('.welcome-screen').removeClass('hidden');
+        /*Toggle Function select a song with song variable and check if the song is already playing if it then it pause the song and change icon else it play the song.*/
+        function ToggleSong() {
+         var song = document.querySelector('audio');
+         if(song.paused==true){
+             console.log('playing');
+             song.play();
+             $('.play-icon').removeClass('fa-play').addClass('fa-pause');
+         }
+         else{
+             console.log('pausing');
+             song.pause();
+             $('.play-icon').removeClass('fa-pause').addClass('fa-play');
+         }
+        }
+    $('.welcome-screen button').on('click', function() {
+        var name = $('#name-input').val();
+        if (name.length > 2) {
+            var message = "Welcome, " + name;
+            $('.main .user-name').text(message);
+            $('.welcome-screen').addClass('hidden');
+            $('.main').removeClass('hidden');
+        } else {
+            $('#name-input').addClass('error');
+        }
     });
-        $('body').on('keypress',function (event) {
-            var song = document.querySelector('audio');
-            if(event.keyCode==32){
-                if(song.paused==true){
-                    console.log('playing');
-                    $('.play-icon').addClass('fa-pause').removeClass('fa-play');
-                    song.play();
+    $('.play-icon').on('click', function() {
+        var song = document.querySelector('audio');
+        ToggleSong();
+    });
+    $('body').on('keypress', function(event) {
+                if (event.keyCode == 32) {
+                    ToggleSong();
                 }
-                else {
-                    console.log('pausing');
-                    $('.play-icon').addClass('fa-play').removeClass('fa-pause');
-                    song.pause();
-                }
+            });
+        function fancyTimeFormat(time)
+        {
+            // Hours, minutes and seconds
+            var hrs = ~~(time / 3600);
+            var mins = ~~((time % 3600) / 60);
+            var secs = ~~time % 60;
+
+            // Output like "1:01" or "4:03:59" or "123:03:59"
+            var ret = "";
+
+            if (hrs > 0) {
+                ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
             }
-        });
-        $('.play-icon').on('click',function() {
-            var song = document.querySelector('audio');
-            if(song.paused==true){
-                console.log('playing');
-                $('.play-icon').addClass('fa-pause').removeClass('fa-play');
-                song.play();
-            }
-            else {
-                console.log('pausing');
-                $('.play-icon').addClass('fa-play').removeClass('fa-pause');
-                song.pause();
-            }
-        });
+
+            ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+            ret += "" + secs;
+            return ret;
+        }
+    function updateCurrentTime() {
+        var song = document.querySelector('audio');
+        var currentTime = Math.floor(song.currentTime);
+        currentTime = fancyTimeFormat(currentTime);
+
+        var duration = Math.floor(song.duration);
+        duration = fancyTimeFormat(duration);
+        var retime = reverse(duration);
+        $('.time-elapsed').text(currentTime);
+        $('.song-duration').text(duration);
     }
-    else{
-        $('#name-input').addClass('error');
-        $('.welcome-screen h4').text('Invalid Name');
-        alert('Wrong Input');
+
+    var songName= 'Tamma Song';
+    window.onload = function () {
+        $('.song-name').text(songName);
+        updateCurrentTime();
+        setInterval(function () {
+            updateCurrentTime();
+        },1000);
     }
-});
-</script>
+    </script>
 </body>
 
 </html>
